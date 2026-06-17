@@ -9,10 +9,15 @@
     const role = localStorage.getItem("userRole");
     const dept = localStorage.getItem("userDept");
 
-    if (!role) {
-        window.location.href = "login.html";
-    } else if (role === "Student" && !dept) {
-        window.location.href = "select_dept.html";
+    // Vercel homepage redirect
+    if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
+        if (!role) {
+            window.location.href = "login.html";
+        } else if (role === "Student" && !dept) {
+            window.location.href = "select_dept.html";
+        } else {
+            window.location.href = "home.html";
+        }
     }
 </script>
 
