@@ -6,18 +6,8 @@
 <title>Smart Complaint Portal - P.R. Pote Patil College</title>
 
 <script>
-    const role = localStorage.getItem("userRole");
-    const dept = localStorage.getItem("userDept");
-
-    // Vercel homepage redirect
     if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
-        if (!role) {
-            window.location.href = "login.html";
-        } else if (role === "Student" && !dept) {
-            window.location.href = "select_dept.html";
-        } else {
-            window.location.href = "home.html";
-        }
+        window.location.href = "start.html";
     }
 </script>
 
