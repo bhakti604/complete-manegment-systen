@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Complaint Portal - P.R. Pote Patil College</title>
+
+<script>
+    const role = localStorage.getItem("userRole");
+    const dept = localStorage.getItem("userDept");
+
+    if (!role) {
+        window.location.href = "login.html";
+    } else if (role === "Student" && !dept) {
+        window.location.href = "select_dept.html";
+    }
+</script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+    color: white;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background: rgba(30, 58, 138, 0.2);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid #f97316;
+}
+
+.logo-section { display: flex; align-items: center; gap: 12px; }
+.logo { width: 50px; }
+.portal-title { font-weight: 700; color: #fff; }
+
+.nav-links { display: flex; align-items: center; gap: 20px; }
+.back-btn {
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.logout-btn {
+    background: #ef4444;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.container {
+    max-width: 650px;
+    margin: 40px auto;
+    padding: 35px;
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+h2 {
+    text-align: center;
+    background: linear-gradient(to right, #f97316, #facc15);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+}
+
+label { font-size: 14px; color: #94a3b8; }
+
+input, textarea, select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(15, 23, 42, 0.7);
+    color: white;
+    outline: none;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #38bdf8;
+}
+
+.row { display: flex; gap: 20px; }
+.row > div { flex: 1; }
+
+button[type="submit"] {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(45deg, #f97316, #ea580c);
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+}
+</style>
+</head>
+<body onload="setDefaults()">
+
+<div class="header">
+    <div class="logo-section">
+        <img src="assets/logo.png" class="logo" alt="Logo">
+        <span class="portal-title">Smart Complaint Portal</span>
+    </div>
+    <nav class="nav-links">
+        <a href="dashboard.html" class="back-btn">Tracking</a>
+        <a href="home.html" class="back-btn">⬅ Home</a>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
+</div>
+
+<div class="container">
+    <h2>Register Complaint</h2>
+
+    <form id="complaintForm">
+        <label for="name">Full Name *</label>
+        <input type="text" id="name" placeholder="E.g. Bhakti Kaner" required>
+
+        <div class="row">
+            <div>
+                <label for="dept">Department *</label>
+                <select id="dept" required title="Select Department">
+                    <option value="">Select</option>
+                    <option value="AI-DS">AI-DS</option>
+                    <option value="AIML">AIML</option>
+                    <option value="CSE">CSE</option>
+                    <option value="EXTC">EXTC</option>
+                    <option value="MECH">MECH</option>
+                    <option value="CIVIL">CIVIL</option>
+                </select>
+            </div>
+            <div>
+                <label for="category">Category</label>
+                <select id="category" title="Select Category">
+                    <option value="Student">Student</option>
+                    <option value="Faculty">Faculty</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div>
+                <label for="targetLevel">Submit To (Authority) *</label>
+                <select id="targetLevel" title="Select Authority Level" required>
+                    <option value="">Select</option>
+                    <option value="HOD">HOD (Department Level)</option>
+                    <option value="Principal">Principal (College Level)</option>
+                    <option value="Management">Management (High Level)</option>
+                </select>
+            </div>
+            <div>
+                <label for="priority">Priority</label>
+                <select id="priority" title="Select Priority">
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Critical">Critical</option>
+                </select>
+            </div>
+        </div>
+
+        <label for="msg">Complaint Description *</label>
+        <textarea id="msg" rows="4" placeholder="Describe your issue here..." required></textarea>
+
+        <button type="submit">Submit Complaint</button>
+    </form>
+</div>
+
+<script src="js/script.js"></script>
+<script>
+function setDefaults() {
+    const savedDept = localStorage.getItem("userDept");
+    if (savedDept) {
+        document.getElementById("dept").value = savedDept;
+    }
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

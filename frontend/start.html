@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-family: 'Georgia', serif;
+  background: linear-gradient(135deg, #020617, #0f172a);
+  color: white;
+  overflow: hidden;
+}
+
+/* 🌟 SHINING BLUE EFFECT */
+.shine {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(56,189,248,0.25), transparent 70%);
+  filter: blur(120px);
+  animation: moveShine 8s infinite alternate;
+}
+
+@keyframes moveShine {
+  from { transform: translate(-80px,-80px); }
+  to { transform: translate(80px,80px); }
+}
+
+/* 🌟 Golden glow */
+.glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: #facc15;
+  filter: blur(160px);
+  top: -120px;
+  left: -120px;
+  opacity: 0.3;
+}
+
+/* 🔥 BIGGER LOGO + GLOW */
+.logo {
+  width: 190px;   /* increased size */
+  z-index: 2;
+
+  filter: drop-shadow(0 0 10px white)
+          drop-shadow(0 0 20px rgba(255,255,255,0.6));
+
+  animation: fadeIn 2s ease-in;
+}
+
+/* 🏆 TITLE */
+h1 {
+  margin-top: 25px;
+  font-size: 32px;
+  color: #f5e6c8;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+/* ➖ Divider */
+.divider {
+  width: 240px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #facc15, transparent);
+  margin: 14px 0;
+}
+
+/* 📘 Subtitle */
+p {
+  font-size: 15px;
+  color: #e5e7eb;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+/* ✨ Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+</style>
+
+<script>
+setTimeout(() => {
+  window.location.href = "login.html";
+}, 5000);  /* increased time */
+</script>
+
+</head>
+
+<body>
+
+<div class="shine"></div>
+<div class="glow"></div>
+
+<img src="assets/logo.png" class="logo" alt="College Logo">
+
+<h1>P. R. POTE PATIL COLLEGE</h1>
+
+<div class="divider"></div>
+
+<p>Engineering & Management • Amravati</p>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Departments</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg,#020617,#0f172a);
+  color: white;
+}
+
+/* 🌟 HEADER (UPDATED) */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 25px;
+  
+  background: linear-gradient(90deg,#1e3a8a,#020617);
+  border-bottom: 2px solid #f97316;
+}
+
+/* LEFT */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 45px;
+}
+
+.title {
+  color: #f5e6c8;
+  font-weight: bold;
+}
+
+/* RIGHT BACK BUTTON */
+.back-btn {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  color: #f97316;
+}
+
+/* PAGE TITLE */
+.page-title {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.page-title h1 {
+  color: #facc15;
+}
+
+.page-title p {
+  color: #38bdf8;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 25px;
+  padding: 40px;
+}
+
+/* CARD */
+.card {
+  background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  padding: 30px 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.05);
+  border: 1px solid #f97316;
+}
+
+.icon {
+  font-size: 40px;
+  margin-bottom: 15px;
+}
+
+.card h3 {
+  margin: 0;
+}
+</style>
+
+<script>
+function goToForm(dept) {
+  localStorage.setItem("department", dept);
+  window.location.href = "index.html";
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- 🔥 HEADER -->
+<div class="header">
+
+  <!-- LEFT -->
+  <div class="left">
+    <img src="assets/logo.png" class="logo" alt="College Logo">
+    <span class="title">P. R. POTE PATIL COLLEGE</span>
+  </div>
+
+  <!-- RIGHT -->
+  <a href="home.html" class="back-btn">⬅ Back to Home</a>
+
+</div>
+
+<!-- TITLE -->
+<div class="page-title">
+  <h1>Select Department</h1>
+  <p>Choose your branch</p>
+</div>
+
+<!-- CARDS -->
+<div class="grid">
+
+  <div class="card" onclick="goToForm('AIDS')">
+    <div class="icon">💻</div>
+    <h3>AIDS</h3>
+  </div>
+
+  <div class="card" onclick="goToForm('AIML')">
+    <div class="icon">🤖</div>
+    <h3>AIML</h3>
+  </div>
+
+  <div class="card" onclick="goToForm('CSE')">
+    <div class="icon">🖥️</div>
+    <h3>CSE</h3>
+  </div>
+
+  <div class="card" onclick="goToForm('EXTC')">
+    <div class="icon">📡</div>
+    <h3>EXTC</h3>
+  </div>
+
+  <div class="card" onclick="goToForm('MECH')">
+    <div class="icon">⚙️</div>
+    <h3>MECH</h3>
+  </div>
+
+  <div class="card" onclick="goToForm('CIVIL')">
+    <div class="icon">🏗️</div>
+    <h3>CIVIL</h3>
+  </div>
+
+</div>
+
+</body>
+</html>

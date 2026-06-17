@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Complaints | P.R. Pote Patil College</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body { margin: 0; font-family: 'Poppins', sans-serif; background: #020617; background-image: radial-gradient(circle at top right, rgba(30, 58, 138, 0.2), transparent); color: white; min-height: 100vh; }
+
+.header { display: flex; justify-content: space-between; padding: 15px 30px; background: rgba(15, 23, 42, 0.8); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 2px solid #38bdf8; align-items: center; }
+.title { font-weight: 700; font-size: 1.2rem; color: #fff; }
+
+/* ✅ NEW CLASSES FOR HEADER & BACK BTN */
+.header-actions { display: flex; gap: 15px; align-items: center; }
+.back-link { color: #38bdf8; text-decoration: none; font-size: 14px; font-weight: 600; }
+.logout-btn { background: #ef4444; border: none; padding: 8px 15px; color: white; border-radius: 8px; cursor: pointer; }
+
+.stats-banner { display: flex; gap: 15px; padding: 25px; max-width: 1100px; margin: auto; }
+.stat-item { flex: 1; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; text-align: center; border: 1px solid rgba(255,255,255,0.05); }
+.stat-item h3 { margin: 0; font-size: 1.8rem; color: #38bdf8; }
+
+.container { padding: 20px; max-width: 900px; margin: auto; }
+.loading-txt { text-align: center; }
+.card { background: rgba(30, 41, 59, 0.5); border-radius: 20px; padding: 25px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden; }
+
+/* ✅ NEW CLASSES FOR DYNAMIC CARD CONTENT */
+.id-text { font-weight: bold; font-size: 0.9rem; color: #94a3b8; }
+.card-footer { font-size: 12px; color: #64748b; margin-top: 10px; }
+
+.tracker-container { margin: 25px 0 15px 0; }
+.progress-bg { background: #1e293b; height: 8px; border-radius: 10px; position: relative; display: flex; justify-content: space-between; align-items: center; }
+.progress-fill { position: absolute; height: 100%; background: linear-gradient(90deg, #38bdf8, #22c55e); border-radius: 10px; transition: 1s ease-in-out; z-index: 1; }
+
+.step-dot { width: 15px; height: 15px; background: #334155; border-radius: 50%; z-index: 2; position: relative; border: 3px solid #0f172a; }
+.step-dot.active { background: #38bdf8; box-shadow: 0 0 10px #38bdf8; }
+.step-dot.completed { background: #22c55e; box-shadow: 0 0 10px #22c55e; }
+
+.step-labels { display: flex; justify-content: space-between; margin-top: 10px; font-size: 11px; font-weight: 600; color: #94a3b8; }
+.label-active { color: #38bdf8; }
+
+.complaint-msg { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px; margin: 15px 0; font-size: 14px; border-left: 3px solid #38bdf8; }
+.status-badge { float: right; padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; text-transform: uppercase; }
+.pending-txt { color: #f97316; background: rgba(249, 115, 22, 0.1); border: 1px solid #f97316; }
+.resolved-txt { color: #22c55e; background: rgba(34, 197, 94, 0.1); border: 1px solid #22c55e; }
+
+.no-data { text-align: center; padding: 50px; color: #94a3b8; }
+</style>
+</head>
+
+<body onload="loadUserData()">
+
+<div class="header">
+    <span class="title">📋 Tracking My Complaints</span>
+    <div class="header-actions">
+        <a href="home.html" class="back-link">⬅ Back</a>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+    </div>
+</div>
+
+<div class="stats-banner">
+    <div class="stat-item"><h3 id="userTotal">0</h3><p>Total Raised</p></div>
+    <div class="stat-item"><h3 id="userPending">0</h3><p>In Process</p></div>
+    <div class="stat-item"><h3 id="userResolved">0</h3><p>Resolved</p></div>
+</div>
+
+<div class="container" id="complaintList">
+    <p class="loading-txt">Loading your reports...</p>
+</div>
+
+<script>
+let userComplaints = [];
+
+async function loadUserData() {
+    try {
+        const response = await fetch('http://localhost:5000/api/complaints');
+        const allData = await response.json();
+        userComplaints = allData; 
+        updateSummary();
+        displayTracking();
+    } catch (error) {
+        console.error("Fetch error:", error);
+        document.getElementById("complaintList").innerHTML = "<p class='no-data'>Backend connect hot nahiye.</p>";
+    }
+}
+
+function updateSummary() {
+    document.getElementById("userTotal").innerText = userComplaints.length;
+    document.getElementById("userPending").innerText = userComplaints.filter(c => c.status === "Pending").length;
+    document.getElementById("userResolved").innerText = userComplaints.filter(c => c.status === "Resolved").length;
+}
+
+function displayTracking() {
+    let box = document.getElementById("complaintList");
+    box.innerHTML = "";
+
+    if(userComplaints.length === 0) {
+        box.innerHTML = "<div class='no-data'>Tumchi ek hi takrar nondavleli nahiye.</div>";
+        return;
+    }
+
+    userComplaints.forEach((c) => {
+        let isResolved = c.status === "Resolved";
+        let progress = isResolved ? "100%" : "50%";
+        let id = c._id ? c._id.toString().substring(18).toUpperCase() : "N/A";
+
+        let card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <span class="status-badge ${isResolved ? 'resolved-txt' : 'pending-txt'}">
+                ${c.status}
+            </span>
+            <div class="id-text">ID: #${id}</div>
+            <div class="complaint-msg">${c.msg || "No description provided."}</div>
+            
+            <div class="tracker-container">
+                <div class="progress-bg">
+                    <div class="progress-fill" style="width: ${progress}"></div>
+                    <div class="step-dot completed"></div>
+                    <div class="step-dot ${isResolved ? 'completed' : 'active'}"></div>
+                    <div class="step-dot ${isResolved ? 'completed' : ''}"></div>
+                </div>
+                <div class="step-labels">
+                    <span class="label-active">SUBMITTED</span>
+                    <span class="${!isResolved ? 'label-active' : ''}">IN REVIEW</span>
+                    <span class="${isResolved ? 'label-active' : ''}">RESOLVED</span>
+                </div>
+            </div>
+            
+            <div class="card-footer">
+                Dept: <b>${c.dept}</b> | Priority: <b>${c.priority}</b>
+            </div>
+        `;
+        box.appendChild(card);
+    });
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = "login.html";
+}
+
+setInterval(loadUserData, 15000);
+</script>
+
+</body>
+</html>

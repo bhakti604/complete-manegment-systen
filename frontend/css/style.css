@@ -1,0 +1,222 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+  color: white;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: -10%;
+  right: -10%;
+  width: 400px;
+  height: 400px;
+  background: rgba(56, 189, 248, 0.15);
+  -webkit-filter: blur(120px);
+  filter: blur(120px);
+  z-index: -1;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -10%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: rgba(249, 115, 22, 0.15);
+  -webkit-filter: blur(120px);
+  filter: blur(120px);
+  z-index: -1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(30, 58, 138, 0.2);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  width: 65px;
+  -webkit-filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+  transition: transform 0.5s ease;
+}
+
+.logo:hover {
+  transform: rotate(360deg);
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  background: rgba(2, 6, 23, 0.8);
+  padding: 15px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #f97316;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.nav a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background: #f97316;
+  transition: width 0.3s ease;
+}
+
+.nav a:hover {
+  color: #f97316;
+}
+
+.nav a:hover::after {
+  width: 100%;
+}
+
+.center {
+  margin-top: 100px;
+  text-align: center;
+  -webkit-animation: fadeIn 1s ease-in;
+  animation: fadeIn 1s ease-in;
+}
+
+h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  /* ✅ FIXED ORDER */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 10px;
+}
+
+.sub-text {
+  color: #38bdf8;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  margin-bottom: 40px;
+  opacity: 0.8;
+}
+
+.main-btn {
+  font-size: 20px;
+  padding: 16px 45px;
+  background: linear-gradient(45deg, #f97316, #facc15);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  color: #000;
+  font-weight: 800;
+  box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+  transition: all 0.4s ease;
+  text-transform: uppercase;
+}
+
+.main-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(249, 115, 22, 0.5);
+  letter-spacing: 1px;
+}
+
+.container {
+  width: 380px;
+  margin: 60px auto;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 35px;
+  border-radius: 20px;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+}
+
+input, select, textarea {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(15, 23, 42, 0.8);
+  color: white;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #f97316;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.2);
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(45deg, #f97316, #ea580c);
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #ea580c, #c2410c);
+  transform: scale(1.02);
+}
+
+#data p {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 20px;
+  border-left: 4px solid #f97316;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+#data p:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(10px);
+}
+
+@-webkit-keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
