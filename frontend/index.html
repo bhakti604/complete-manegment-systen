@@ -6,8 +6,13 @@
 <title>Smart Complaint Portal - P.R. Pote Patil College</title>
 
 <script>
-    if (window.location.pathname === "/" || window.location.pathname.endsWith("index.html")) {
-        window.location.href = "start.html";
+    const role = localStorage.getItem("userRole");
+    const dept = localStorage.getItem("userDept");
+
+    if (!role) {
+        window.location.href = "login.html";
+    } else if (role === "Student" && !dept) {
+        window.location.href = "select_dept.html";
     }
 </script>
 
@@ -206,4 +211,4 @@ function logout() {
 </script>
 
 </body>
-</html>
+</html>            
