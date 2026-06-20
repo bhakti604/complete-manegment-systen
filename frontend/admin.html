@@ -142,7 +142,7 @@
 
             // Database madhun profile check kara
             try {
-                const res = await fetch(`http://localhost:5000/api/admin/profile?email=${email}`);
+                const res = await fetch(`/api/admin/profile?email=${email}`);
                 const admin = await res.json();
 
                 if (!admin || !admin.dept || admin.dept === "") {
@@ -166,7 +166,7 @@
             if (!mobile) { alert("Mobile number garjecha aahe!"); return; }
 
             try {
-                const res = await fetch("http://localhost:5000/api/admin/update-profile", {
+                const res = await fetch("/api/admin/update-profile", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, dept, mobile })
@@ -190,7 +190,7 @@
             console.log("Fetching data for:", adminDept);
 
             try {
-                const res = await fetch("http://localhost:5000/api/complaints");
+                const res = await fetch("/api/complaints");
                 const data = await res.json();
 
                 const filtered = data.filter(c => 
@@ -230,7 +230,7 @@
 
         async function updateStatus(id) {
             try {
-                await fetch(`http://localhost:5000/api/complaints/${id}`, {
+                await fetch(`/api/complaints/${id}`, {
                     method: "PUT",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ status: "Resolved" })

@@ -10,8 +10,8 @@ router.post('/login', adminController.login);
 // Jenvha admin.html load hote tenvha profile check karnyathi
 router.get('/profile', adminController.getProfile);
 
-// 3. Admin Profile Update Route (PUT request)
-// Jenvha Admin modal madhun 'Save' button dabto
+// 3. Admin Profile Update Route
 router.put('/update', adminController.updateProfile);
+router.post('/update-profile', adminController.updateProfile);
 
 module.exports = router;

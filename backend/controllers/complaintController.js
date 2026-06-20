@@ -96,6 +96,15 @@ exports.updateComplaint = async (req, res) => {
       return res.status(404).json({ error: "Complaint not found" });
     }
 
+    // Trigger resolution notification if status changed to Resolved
+    if (status === "Resolved" && updatedComplaint.email) {
+      try {
+        await sendEmail.sendResolutionEmail(updatedComplaint.email, updatedComplaint.fullName, updatedComplaint._id);
+      } catch (mailErr) {
+        console.error("❌ Resolution notification mail fail:", mailErr.message);
+      }
+    }
+
     res.json({ message: "✅ Complaint Updated to " + status, data: updatedComplaint });
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -12,7 +12,7 @@ document.getElementById("complaintForm").addEventListener("submit", async (e) =>
   };
 
   try {
-    const res = await fetch("http://localhost:5000/api/complaints", {
+    const res = await fetch("/api/complaints", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

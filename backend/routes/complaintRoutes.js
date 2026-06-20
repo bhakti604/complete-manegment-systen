@@ -4,19 +4,19 @@ const router = express.Router();
 // ⚠️ Controller import kara
 const complaintController = require("../controllers/complaintController");
 
-// 1. Sagle complaints ghenyasathi (Tuzyatlya controller madhe 'getComplaints' naav aahe)
-router.get("/all", complaintController.getComplaints);
+// 1. Get all complaints (Matches GET /api/complaints)
+router.get("/", complaintController.getComplaints);
 
-// 2. Navin complaint add karnyathi
-router.post("/add", complaintController.addComplaint);
+// 2. Register a new complaint (Matches POST /api/complaints)
+router.post("/", complaintController.addComplaint);
 
-// 3. Status update karnyathi
-router.put("/update/:id", complaintController.updateComplaint);
+// 3. Update complaint status / remarks (Matches PUT /api/complaints/:id)
+router.put("/:id", complaintController.updateComplaint);
 
-// 4. Complaint delete karnyathi
-router.delete("/delete/:id", complaintController.deleteComplaint);
+// 4. Delete a complaint record (Matches DELETE /api/complaints/:id)
+router.delete("/:id", complaintController.deleteComplaint);
 
-// 5. Department wise complaints (Extra feature sathi)
-router.get("/dept/:deptName", complaintController.getDeptComplaints);
+// 5. Get complaints filtered by department & level (Admin View)
+router.get("/filter", complaintController.getAdminFilteredComplaints);
 
 module.exports = router;

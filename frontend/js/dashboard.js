@@ -9,7 +9,7 @@ async function loadData() {
   try {
     // Backend kadun sagle complaints ghene
     // Note: Tuzya server.js madhe path "/api/complaints" asel tar toach vapra
-    const res = await fetch("http://localhost:5000/api/complaints");
+    const res = await fetch("/api/complaints");
     const data = await res.json();
 
     // 🔥 Filter Logic: Fakt Admin chya dept chya complaints dakhva
@@ -64,7 +64,7 @@ async function deleteComplaint(id) {
   if (confirm("Naki delete karayche aahe ka?")) {
     try {
       // URL check kara: server.js madhe delete route konta aahe toach vapra
-      const res = await fetch(`http://localhost:5000/api/complaints/${id}`, {
+      const res = await fetch(`/api/complaints/${id}`, {
         method: "DELETE"
       });
       if (res.ok) {
@@ -80,7 +80,7 @@ async function deleteComplaint(id) {
 // 3. 🔄 UPDATE Status Function
 async function updateStatus(id) {
   try {
-    const res = await fetch(`http://localhost:5000/api/complaints/${id}`, {
+    const res = await fetch(`/api/complaints/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "Resolved" })

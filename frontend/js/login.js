@@ -7,8 +7,8 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const pass = document.getElementById("password").value;
 
     try {
-        // 1. Backend la login request pathva
-        const response = await fetch("http://localhost:5000/api/admin/login", {
+        // 1. Backend API call
+        const response = await fetch("/api/admin/login", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: email, password: pass })

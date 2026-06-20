@@ -75,7 +75,7 @@ let userComplaints = [];
 
 async function loadUserData() {
     try {
-        const response = await fetch('http://localhost:5000/api/complaints');
+        const response = await fetch('/api/complaints');
         const allData = await response.json();
         userComplaints = allData; 
         updateSummary();
